@@ -1,6 +1,4 @@
-// const helpers = require('./helpers');
 const express = require('express');
-// const winston = require('winston');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
