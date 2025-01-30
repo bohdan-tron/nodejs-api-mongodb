@@ -24,3 +24,27 @@ exports.createPost = [
     next();
   }
 ];
+
+exports.createUser = [
+  // check('username')
+  //   .trim()
+  //   .notEmpty().withMessage('Username is required')
+  //   .isLength({ max: 32 }).withMessage('Username must be at most 32 characters'),
+
+  check('email')
+    .trim()
+    .notEmpty().withMessage('Email is required')
+    .isEmail().withMessage('Invalid email format'),
+
+  check('password')
+    .notEmpty().withMessage('Password is required')
+    .isLength({ min: 6, max: 64 }).withMessage('Password must be between 6 and 64 characters'),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  }
+];
